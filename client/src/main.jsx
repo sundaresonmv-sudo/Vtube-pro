@@ -12,8 +12,9 @@ import "./index.css"
 
 // Global Axios Interceptor to dynamically handle sandboxed & production deployments
 axios.interceptors.request.use((config) => {
+  const baseURL = import.meta.env.VITE_API_URL || "http://localhost:5000"
   if (config.url && config.url.startsWith("http://localhost:5000")) {
-    config.url = config.url.replace("http://localhost:5000", "")
+    config.url = config.url.replace("http://localhost:5000", baseURL)
   }
   return config
 })
