@@ -6,7 +6,7 @@ const Download =
   require("../models/Download")
 
 const User =
-  require("../models/User")
+  require("../models/user")
 
 
 // ================= DOWNLOAD VIDEO =================
