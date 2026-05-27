@@ -1,4 +1,5 @@
 import {
+  BrowserRouter,
   Routes,
   Route,
   Navigate
@@ -6,67 +7,34 @@ import {
 
 import Navbar from "./components/Navbar"
 
-import Login from "./pages/login"
+import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Comments from "./pages/Comments"
-import Plans from "./pages/Plans"
 import VideoPlayer from "./pages/VideoPlayer"
 import Downloads from "./pages/Downloads"
+import Plans from "./pages/Plans"
 import VideoCall from "./pages/VideoCall"
+
 function App() {
 
   const user = JSON.parse(
     localStorage.getItem("user")
   )
 
-  // south indian cities
-  const southCities = [
-
-    "chennai",
-    "bangalore",
-    "hyderabad",
-    "kochi",
-    "vijayawada"
-
-  ]
-
-  // current hour
-  const hour =
-    new Date().getHours()
-
-  // light theme condition
-  const isLightTheme =
-
-    user &&
-
-    southCities.includes(
-      user.city?.toLowerCase()
-    ) &&
-
-    hour >= 10 &&
-    hour <= 12
-
   return (
 
-    <div
-
-      style={{
-  backgroundColor: isLightTheme
-    ? "white"
-    : "black",
-
-  color: isLightTheme
-    ? "black"
-    : "white",
-
-  minHeight: "100vh"
-     }}
-
-    >
+    <BrowserRouter>
 
       <Navbar />
 
       <Routes>
+
+        <Route
+          path="/"
+          element={
+            <Navigate to="/login" />
+          }
+        />
 
         <Route
           path="/login"
@@ -83,15 +51,6 @@ function App() {
           element={
             user
               ? <Comments />
-              : <Navigate to="/login" />
-          }
-        />
-
-        <Route
-          path="/plans"
-          element={
-            user
-              ? <Plans />
               : <Navigate to="/login" />
           }
         />
@@ -115,24 +74,26 @@ function App() {
         />
 
         <Route
+          path="/plans"
+          element={
+            user
+              ? <Plans />
+              : <Navigate to="/login" />
+          }
+        />
+
+        <Route
           path="/videocall"
           element={
             user
               ? <VideoCall />
               : <Navigate to="/login" />
-            }
-        />
-
-        <Route
-          path="*"
-          element={
-            <Navigate to="/video" />
           }
         />
 
       </Routes>
 
-    </div>
+    </BrowserRouter>
 
   )
 
