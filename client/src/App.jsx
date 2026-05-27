@@ -1,5 +1,4 @@
 import {
-  BrowserRouter,
   Routes,
   Route,
   Navigate
@@ -23,7 +22,7 @@ function App() {
 
   return (
 
-    <BrowserRouter>
+    <>
 
       <Navbar />
 
@@ -93,7 +92,7 @@ function App() {
 
       </Routes>
 
-    </BrowserRouter>
+    </>
 
   )
 
